@@ -1,45 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Меню модуля -->
 <odoo>
     <data>
-    <!-- Головне меню -->
-    <menuitem id="menu_electricity_price_root"
-              name="Ціни на Електроенергію РДН"
-              sequence="100"/>
+        <!-- Main menu -->
+        <menuitem id="menu_electricity_price_root"
+                  name="Ціни на Електроенергію РДН"
+                  sequence="100"
+                  web_icon="hd_electricity_price,static/descriptions/icon.png"/>
 
+        <!-- Prices submenu -->
+        <menuitem id="menu_electricity_price_data"
+                  name="Ціни"
+                  parent="menu_electricity_price_root"
+                  action="electricity_price_action"
+                  sequence="10"/>
 
-    <!-- Підменю: Ціни -->
-    <menuitem id="menu_electricity_price_data"
-              name="Ціни"
-              parent="menu_electricity_price_root"
-              action="electricity_price_action"
-              sequence="10"/>
+        <!-- ENTSO-E domains submenu -->
+        <menuitem id="menu_entsoe_domain_config"
+                  name="Домени ENTSO-E"
+                  parent="menu_electricity_price_root"
+                  action="entsoe_domain_action"
+                  sequence="20"/>
 
-    <!-- Підменю: Налаштування доменів ENTSO-E -->
-    <menuitem id="menu_entsoe_domain_config"
-              name="Домени ENTSO-E"
-              parent="menu_electricity_price_root"
-              action="entsoe_domain_action"
-              sequence="20"/>
+        <!-- Import wizard submenu -->
+        <menuitem id="menu_electricity_price_import_wizard"
+                  name="Імпорт даних (вручну)"
+                  parent="menu_electricity_price_root"
+                  action="electricity_price_import_wizard_action"
+                  sequence="30"/>
 
-    <!-- Підменю: Імпорт даних (Майстер) -->
-    <menuitem id="menu_electricity_price_import_wizard"
-              name="Імпорт даних (вручну)"
-              parent="menu_electricity_price_root"
-              action="electricity_price_import_wizard_action"
-              sequence="30"/>
+        <!-- Configuration submenu -->
+        <menuitem id="menu_electricity_price_configuration"
+                  name="Налаштування"
+                  parent="menu_electricity_price_root"
+                  sequence="99"
+                  groups="base.group_system"/>
 
-    <!-- Підменю: Налаштування модуля -->
-    <menuitem id="menu_electricity_price_configuration"
-              name="Налаштування"
-              parent="menu_electricity_price_root"
-              sequence="99"
-              groups="base.group_system"/> <!-- Доступно лише для адміністраторів -->
-
-    <menuitem id="menu_electricity_price_settings"
-              name="Налаштування модуля"
-              parent="menu_electricity_price_configuration"
-              action="res_config_settings_action_electricity_price"
-              sequence="10"/>
+        <menuitem id="menu_electricity_price_settings"
+                  name="Налаштування модуля"
+                  parent="menu_electricity_price_configuration"
+                  action="res_config_settings_action_electricity_price"
+                  sequence="10"/>
     </data>
 </odoo>

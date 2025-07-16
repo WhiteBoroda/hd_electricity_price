@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-		<!-- Дія для майстра імпорту цін -->
-		<record id="electricity_price_import_wizard_action" model="ir.actions.act_window">
-			<field name="name">Імпорт цін на електроенергію</field>
-			<field name="res_model">electricity.price.import.wizard</field>
-			<field name="view_mode">form</field>
-			<field name="target">new</field>
-		</record>
+    <data>
+        <!-- Action for import wizard -->
+        <record id="electricity_price_import_wizard_action" model="ir.actions.act_window">
+            <field name="name">Імпорт цін на електроенергію</field>
+            <field name="res_model">electricity.price.import.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
 
-		<!-- Вид форми для майстра імпорту -->
-		<record id="electricity_price_import_wizard_form_view" model="ir.ui.view">
-			<field name="name">electricity.price.import.wizard.form</field>
-			<field name="model">electricity.price.import.wizard</field>
-			<field name="arch">
-				<form string="Імпорт цін на електроенергію">
-					<sheet>
-						<group>
-							<field name="country_id"/>
-							<field name="import_date"/>
-						</group>
-					</sheet>
-					<footer>
-						<button name="action_import_prices" type="object" string="Імпортувати" class="oe_highlight"/>
-						<button string="Скасувати" class="btn btn-secondary" special="cancel"/>
-					</footer>
-				</form>
-			</field>
-		</record>
+        <!-- Form view for import wizard -->
+        <record id="electricity_price_import_wizard_form_view" model="ir.ui.view">
+            <field name="name">electricity.price.import.wizard.form</field>
+            <field name="model">electricity.price.import.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Імпорт цін на електроенергію">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>Імпорт цін на електроенергію</h1>
+                            <p>Виберіть країну та дату для завантаження цін з ENTSO-E API</p>
+                        </div>
+                        <group>
+                            <field name="country_id" options="{'no_create': True}"/>
+                            <field name="import_date"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_import_prices" type="object" string="Імпортувати" class="oe_highlight"/>
+                        <button string="Скасувати" class="btn btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
 </odoo>

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-    <!-- Розширення виду форми для res.country -->
-    <record id="view_country_form_inherit_electricity_price" model="ir.ui.view">
-        <field name="name">res.country.form.inherit.electricity.price</field>
-        <field name="model">res.country</field>
-        <field name="inherit_id" ref="base.view_country_form"/>
-        <field name="arch" >
-            <field name="currency_id" position="after">
-                <field name="entsoe_domain_id"/>
+        <!-- Inherit form view for res.country -->
+        <record id="view_country_form_inherit_electricity_price" model="ir.ui.view">
+            <field name="name">res.country.form.inherit.electricity.price</field>
+            <field name="model">res.country</field>
+            <field name="inherit_id" ref="base.view_country_form"/>
+            <field name="arch" type="xml">
+                <field name="currency_id" position="after">
+                    <field name="entsoe_domain_id"/>
+                </field>
             </field>
-        </field>
-    </record>
+        </record>
     </data>
 </odoo>

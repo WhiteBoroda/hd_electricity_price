@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Метадані модуля Odoo
-
 {
     'name': "Ціни на Електроенергію РДН",
     'summary': """Модуль для збору даних про ціну електроенергії на ринку РДН з Transparency Platform.""",
@@ -16,14 +14,14 @@
     'depends': ['base', 'web'],
     'data': [
         'security/ir.model.access.csv',
+        'data/entsoe_domains_data.xml',
         'data/ir_cron.xml',
-        'views/entsoe_domain_views.xml', 
-        'views/electricity_price_views.xml',  
+        'views/entsoe_domain_views.xml',
+        'views/electricity_price_views.xml',
         'views/res_country_views.xml',
-        'views/res_config_settings_views.xml',  
-        'views/menus.xml',
+        'views/res_config_settings_views.xml',
         'wizards/import_price_wizard_views.xml',
-       
+        'views/menus.xml',
     ],
     'images': ['static/descriptions/icon.png'],
     'license': 'LGPL-3',

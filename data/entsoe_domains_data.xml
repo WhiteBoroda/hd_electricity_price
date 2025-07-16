@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- ENTSO-E Domains for major European countries -->
+
+        <!-- Ukraine -->
+        <record id="entsoe_domain_ukraine" model="electricity.entsoe.domain">
+            <field name="name">Ukraine</field>
+            <field name="domain_code">10Y1001A1001A869</field>
+            <field name="country_id" ref="base.ua"/>
+        </record>
+
+        <!-- Germany -->
+        <record id="entsoe_domain_germany" model="electricity.entsoe.domain">
+            <field name="name">Germany</field>
+            <field name="domain_code">10Y1001A1001A83F</field>
+            <field name="country_id" ref="base.de"/>
+        </record>
+
+        <!-- Poland -->
+        <record id="entsoe_domain_poland" model="electricity.entsoe.domain">
+            <field name="name">Poland</field>
+            <field name="domain_code">10YPL-AREA-----S</field>
+            <field name="country_id" ref="base.pl"/>
+        </record>
+
+        <!-- Czech Republic -->
+        <record id="entsoe_domain_czech" model="electricity.entsoe.domain">
+            <field name="name">Czech Republic</field>
+            <field name="domain_code">10YCZ-CEPS-----N</field>
+            <field name="country_id" ref="base.cz"/>
+        </record>
+
+        <!-- Slovakia -->
+        <record id="entsoe_domain_slovakia" model="electricity.entsoe.domain">
+            <field name="name">Slovakia</field>
+            <field name="domain_code">10YSK-SEPS-----K</field>
+            <field name="country_id" ref="base.sk"/>
+        </record>
+
+        <!-- Hungary -->
+        <record id="entsoe_domain_hungary" model="electricity.entsoe.domain">
+            <field name="name">Hungary</field>
+            <field name="domain_code">10YHU-MAVIR----U</field>
+            <field name="country_id" ref="base.hu"/>
+        </record>
+
+        <!-- Romania -->
+        <record id="entsoe_domain_romania" model="electricity.entsoe.domain">
+            <field name="name">Romania</field>
+            <field name="domain_code">10YRO-TEL------P</field>
+            <field name="country_id" ref="base.ro"/>
+        </record>
+
+        <!-- France -->
+        <record id="entsoe_domain_france" model="electricity.entsoe.domain">
+            <field name="name">France</field>
+            <field name="domain_code">10YFR-RTE------C</field>
+            <field name="country_id" ref="base.fr"/>
+        </record>
+
+        <!-- Update country records with ENTSO-E domains -->
+        <record id="base.ua" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_ukraine"/>
+        </record>
+
+        <record id="base.de" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_germany"/>
+        </record>
+
+        <record id="base.pl" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_poland"/>
+        </record>
+
+        <record id="base.cz" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_czech"/>
+        </record>
+
+        <record id="base.sk" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_slovakia"/>
+        </record>
+
+        <record id="base.hu" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_hungary"/>
+        </record>
+
+        <record id="base.ro" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_romania"/>
+        </record>
+
+        <record id="base.fr" model="res.country">
+            <field name="entsoe_domain_id" ref="entsoe_domain_france"/>
+        </record>
+    </data>
+</odoo>

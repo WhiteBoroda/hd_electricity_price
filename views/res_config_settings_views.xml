@@ -1,53 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="res_config_settings_view_form_electricity_price" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.electricity.price</field>
-        <field name="model">res.config.settings</field>
-        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
-        <field name="arch">
-            <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div class="app_settings_block" data-string="Ціни на Електроенергію" string="Ціни на Електроенергію" data-category="Ціни на Електроенергію" data-icon="fa-bolt">
-                    <h2>Налаштування API ENTSO-E</h2>
-                    <div class="row mt16 o_settings_container">
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <span class="o_form_label">Базовий URL API ENTSO-E</span>
-                                <div class="text-muted">
-                                    Базовий URL для запитів до ENTSO-E Transparency Platform API.
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="entsoe_api_base_url"/>
+    <data>
+        <!-- Inherit settings form view -->
+        <record id="res_config_settings_view_form_electricity_price" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.electricity.price</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <form position="inside">
+                    <div class="app_settings_block" data-string="Ціни на Електроенергію" string="Ціни на Електроенергію" data-key="hd_electricity_price">
+                        <h2>Налаштування API ENTSO-E</h2>
+                        <div class="row mt16 o_settings_container">
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Базовий URL API ENTSO-E</span>
+                                    <div class="text-muted">
+                                        Базовий URL для запитів до ENTSO-E Transparency Platform API.
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="entsoe_api_base_url" placeholder="https://transparency.entsoe.eu/api"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-12 col-lg-6 o_setting_box">
-                            <div class="o_setting_right_pane">
-                                <span class="o_form_label">Токен безпеки API ENTSO-E</span>
-                                <div class="text-muted">
-                                    Ваш персональний токен безпеки для доступу до API ENTSO-E.
-                                    Отримайте його на <a href="https://transparency.entsoe.eu/content/static_content/Static%20content/web%20api/Guide.html" target="_blank">сайті ENTSO-E</a>.
-                                </div>
-                                <div class="content-group">
-                                    <div class="mt16">
-                                        <field name="entsoe_api_token" password="true"/>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Токен безпеки API ENTSO-E</span>
+                                    <div class="text-muted">
+                                        Ваш персональний токен безпеки для доступу до API ENTSO-E.
+                                        Отримайте його на <a href="https://transparency.entsoe.eu/content/static_content/Static%20content/web%20api/Guide.html" target="_blank">сайті ENTSO-E</a>.
+                                    </div>
+                                    <div class="content-group">
+                                        <div class="mt16">
+                                            <field name="entsoe_api_token" password="True" placeholder="Введіть ваш API токен"/>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </xpath>
-        </field>
-    </record>
+                </form>
+            </field>
+        </record>
 
-    <record id="res_config_settings_action_electricity_price" model="ir.actions.act_window">
-        <field name="name">Налаштування</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">res.config.settings</field>
-        <field name="view_mode">form</field>
-        <field name="target">new</field>
-        <field name="context">{'module' : 'odoo_electricity_price'}</field>
-    </record>
+        <!-- Action for settings -->
+        <record id="res_config_settings_action_electricity_price" model="ir.actions.act_window">
+            <field name="name">Налаштування</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="context">{'module': 'hd_electricity_price'}</field>
+        </record>
+    </data>
 </odoo>

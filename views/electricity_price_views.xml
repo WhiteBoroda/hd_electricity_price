@@ -1,77 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-	<data>
-		<!-- Дія для моделі electricity.price.rdn -->
-		<record id="electricity_price_action" model="ir.actions.act_window">
-			<field name="name">Ціни на Електроенергію РДН</field>
-			<field name="res_model">electricity.price.rdn</field>
-			<field name="view_mode">tree,form</field>
-			<field name="help" type="html">
-				<p class="o_view_nocontent_smiling_face">
-					Тут будуть відображатися завантажені ціни на електроенергію.
-				</p>
-				<p>
-					Дані можуть бути імпортовані автоматично (за розкладом) або вручну.
-				</p>
-			</field>
-		</record>
+    <data>
+        <!-- Action for electricity.price.rdn model -->
+        <record id="electricity_price_action" model="ir.actions.act_window">
+            <field name="name">Ціни на Електроенергію РДН</field>
+            <field name="res_model">electricity.price.rdn</field>
+            <field name="view_mode">tree,form,graph,pivot</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Тут будуть відображатися завантажені ціни на електроенергію.
+                </p>
+                <p>
+                    Дані можуть бути імпортовані автоматично (за розкладом) або вручну.
+                </p>
+            </field>
+        </record>
 
-		<!-- Вид дерева (списку) для electricity.price.rdn -->
-		<record id="electricity_price_view_tree" model="ir.ui.view">
-			<field name="name">electricity.price.rdn.tree</field>
-			<field name="model">electricity.price.rdn</field>
-			<field name="arch">
-				<tree string="Ціни на Електроенергію РДН" decoration-info="hour &lt; 6 or hour &gt; 21">
-					<field name="country_id"/>
-					<field name="price_date"/>
-					<field name="hour"/>
-					<field name="price"/>
-				</tree>
-			</field>
-		</record>
+        <!-- Tree view for electricity.price.rdn -->
+        <record id="electricity_price_view_tree" model="ir.ui.view">
+            <field name="name">electricity.price.rdn.tree</field>
+            <field name="model">electricity.price.rdn</field>
+            <field name="arch" type="xml">
+                <tree string="Ціни на Електроенергію РДН" decoration-info="hour &lt; 6 or hour &gt; 21">
+                    <field name="country_id"/>
+                    <field name="price_date"/>
+                    <field name="hour"/>
+                    <field name="price"/>
+                    <field name="entsoe_domain_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
 
-		<!-- Вид форми для electricity.price.rdn -->
-		<record id="electricity_price_view_form" model="ir.ui.view">
-			<field name="name">electricity.price.rdn.form</field>
-			<field name="model">electricity.price.rdn</field>
-			<field name="arch">
-				<form string="Ціна на Електроенергію РДН">
-					<sheet>
-						<group>
-							<group>
-								<field name="country_id"/>
-								<field name="entsoe_domain_id"/>
-							</group>
-							<group>
-								<field name="price_date"/>
-								<field name="hour"/>
-								<field name="price"/>
-							</group>
-						</group>
-						<group string="Деталі API">
-							<field name="api_response_raw"/>
-						</group>
-					</sheet>
-				</form>
-			</field>
-		</record>
+        <!-- Form view for electricity.price.rdn -->
+        <record id="electricity_price_view_form" model="ir.ui.view">
+            <field name="name">electricity.price.rdn.form</field>
+            <field name="model">electricity.price.rdn</field>
+            <field name="arch" type="xml">
+                <form string="Ціна на Електроенергію РДН">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="country_id"/>
+                                <field name="entsoe_domain_id"/>
+                            </group>
+                            <group>
+                                <field name="price_date"/>
+                                <field name="hour"/>
+                                <field name="price"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Деталі API">
+                                <field name="api_response_raw"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
-		<!-- Вид пошуку для electricity.price.rdn -->
-		<record id="electricity_price_view_search" model="ir.ui.view">
-			<field name="name">electricity.price.rdn.search</field>
-			<field name="model">electricity.price.rdn</field>
-			<field name="arch">
-				<search string="Пошук цін на електроенергію">
-					<field name="country_id"/>
-					<field name="price_date"/>
-					<field name="hour"/>
-					<group expand="0" string="Групувати за">
-						<filter name="group_by_country" string="Країна" context="{'group_by': 'country_id'}"/>
-						<filter name="group_by_date" string="Дата" context="{'group_by': 'price_date'}"/>
-						<filter name="group_by_hour" string="Година" context="{'group_by': 'hour'}"/>
-					</group>
-				</search>
-			</field>
-		</record>
-	</data>
+        <!-- Search view for electricity.price.rdn -->
+        <record id="electricity_price_view_search" model="ir.ui.view">
+            <field name="name">electricity.price.rdn.search</field>
+            <field name="model">electricity.price.rdn</field>
+            <field name="arch" type="xml">
+                <search string="Пошук цін на електроенергію">
+                    <field name="country_id"/>
+                    <field name="price_date"/>
+                    <field name="hour"/>
+                    <filter name="today" string="Сьогодні" domain="[('price_date', '=', context_today())]"/>
+                    <filter name="this_week" string="Цей тиждень" domain="[('price_date', '&gt;=', (context_today() - datetime.timedelta(days=7)))]"/>
+                    <filter name="this_month" string="Цей місяць" domain="[('price_date', '&gt;=', (context_today().replace(day=1)))]"/>
+                    <separator/>
+                    <filter name="night_hours" string="Нічні години (23-06)" domain="[('hour', 'in', [23, 0, 1, 2, 3, 4, 5, 6])]"/>
+                    <filter name="day_hours" string="Денні години (07-22)" domain="[('hour', '&gt;=', 7), ('hour', '&lt;=', 22)]"/>
+                    <group expand="0" string="Групувати за">
+                        <filter name="group_by_country" string="Країна" context="{'group_by': 'country_id'}"/>
+                        <filter name="group_by_date" string="Дата" context="{'group_by': 'price_date'}"/>
+                        <filter name="group_by_hour" string="Година" context="{'group_by': 'hour'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Graph view for electricity.price.rdn -->
+        <record id="electricity_price_view_graph" model="ir.ui.view">
+            <field name="name">electricity.price.rdn.graph</field>
+            <field name="model">electricity.price.rdn</field>
+            <field name="arch" type="xml">
+                <graph string="Ціни на Електроенергію" type="line">
+                    <field name="hour" type="row"/>
+                    <field name="price" type="measure"/>
+                    <field name="country_id" type="col"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Pivot view for electricity.price.rdn -->
+        <record id="electricity_price_view_pivot" model="ir.ui.view">
+            <field name="name">electricity.price.rdn.pivot</field>
+            <field name="model">electricity.price.rdn</field>
+            <field name="arch" type="xml">
+                <pivot string="Аналіз цін на електроенергію">
+                    <field name="price_date" type="row" interval="day"/>
+                    <field name="hour" type="col"/>
+                    <field name="price" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+    </data>
 </odoo>

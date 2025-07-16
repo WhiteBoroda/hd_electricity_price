@@ -3,4 +3,4 @@ access_electricity_price_rdn_user,electricity.price.rdn.user,model_electricity_p
 access_electricity_price_rdn_manager,electricity.price.rdn.manager,model_electricity_price_rdn,base.group_system,1,1,1,1
 access_entsoe_domain_user,electricity.entsoe.domain.user,model_electricity_entsoe_domain,base.group_user,1,0,0,0
 access_entsoe_domain_manager,electricity.entsoe.domain.manager,model_electricity_entsoe_domain,base.group_system,1,1,1,1
-access_electricity_price_import_wizard_user,electricity.price.import.wizard.user,model_electricity_price_import_wizard,base.group_user,1,0,1,0
+access_electricity_price_import_wizard_user,electricity.price.import.wizard.user,model_electricity_price_import_wizard,base.group_user,1,1,1,1
