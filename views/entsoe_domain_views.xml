@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Види для моделі entsoe.domain -->
+<odoo>
+	<!-- Дія для моделі entsoe.domain -->
+	<record id="entsoe_domain_action" model="ir.actions.act_window">
+		<field name="name">Домени ENTSO-E</field>
+		<field name="res_model">electricity.entsoe.domain</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help" type="html">
+			<p class="o_view_nocontent_smiling_face">
+				Створіть перший домен ENTSO-E для мапінгу країн.
+			</p>
+			<p>
+				Ці домени використовуються для запитів до API ENTSO-E.
+			</p>
+		</field>
+	</record>
+
+	<!-- Вид дерева (списку) для entsoe.domain -->
+	<record id="entsoe_domain_view_tree" model="ir.ui.view">
+		<field name="name">entsoe.domain.tree</field>
+		<field name="model">electricity.entsoe.domain</field>
+		<field name="arch">
+			<tree string="Домени ENTSO-E">
+				<field name="name"/>
+				<field name="domain_code"/>
+				<field name="country_id"/>
+			</tree>
+		</field>
+	</record>
+
+	<!-- Вид форми для entsoe.domain -->
+	<record id="entsoe_domain_view_form" model="ir.ui.view">
+		<field name="name">entsoe.domain.form</field>
+		<field name="model">electricity.entsoe.domain</field>
+		<field name="arch">
+			<form string="Домен ENTSO-E">
+				<sheet>
+					<group>
+						<group>
+							<field name="name"/>
+							<field name="domain_code"/>
+						</group>
+						<group>
+							<field name="country_id"/>
+						</group>
+					</group>
+				</sheet>
+			</form>
+		</field>
+	</record>
+</odoo>
