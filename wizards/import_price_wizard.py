@@ -33,27 +33,21 @@ class ImportElectricityPriceWizard(models.TransientModel):
             }
 
     def action_import_prices(self):
-        """Запускає імпорт цін для обраної країни та дати"""
+        """
+        Запускає імпорт цін для обраної країни та дати.
+        """
         self.ensure_one()
-
         if not self.country_id or not self.import_date:
             raise UserError(_("Будь ласка, оберіть країну та дату для імпорту."))
 
-        if not self.country_id.entsoe_domain_id:
-            raise UserError(_("Для обраної країни не налаштований домен ENTSO-E."))
-
         try:
-            created_count = self.env['electricity.price.rdn']._fetch_and_store_prices(
-                self.country_id.id,
-                self.import_date
-            )
-
+            self.env['electricity.price.rdn']._fetch_and_store_prices(self.country_id.id, self.import_date)
             return {
                 'type': 'ir.actions.client',
                 'tag': 'display_notification',
                 'params': {
                     'title': _('Успіх!'),
-                    'message': _('Успішно імпортовано %d записів цін на електроенергію.') % created_count,
+                    'message': _('Ціни на електроенергію успішно імпортовано.'),
                     'type': 'success',
                     'sticky': False,
                 }
@@ -61,4 +55,6 @@ class ImportElectricityPriceWizard(models.TransientModel):
         except UserError as e:
             raise e
         except Exception as e:
-            raise UserError(_("Не вдалося імпортувати ціни: %s") % str(e))
+            # Исправлена обработка ошибок - избегаем проблем с форматированием
+            error_msg = str(e) if e else "Невідома помилка"
+            raise UserError(_("Не вдалося імпортувати ціни: %s") % error_msg)
